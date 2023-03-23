@@ -6,21 +6,25 @@ function getRandomID(max) {
 /* The aim of the game is to try and match the type to the pokemon based on what is stored in the pokemon API. 
 Initially try to 'catch' 30 pokemon at random, with possible bonus points for famous pokemon.
 */
+// Constants
+const choice = getRandomID(151)
+const startUrl = 'https://pokeapi.co/api/v2/pokemon/'+choice
+// 404 error with guessUrl
+const guessUrl = `https://pokeapi.co/api/v2/type/18`;
 
-document.querySelector('button').addEventListener('click', getFetch);
+// Button Functionality
+document.getElementById('start').addEventListener('click', getPokemon);
 
-function getFetch() {
-	const choice = getRandomID(151)
-	const url = 'https://pokeapi.co/api/v2/pokemon/'+choice
-	// const nasa_key = 'tMakPDi527qDIiFdyK9zwIsVWbionCa4ImGR4vHw';
-	// const url = `https://api.nasa.gov/planetary/apod?api_key=${nasa_key}&date=${choice}`;
+document.getElementById('guess').addEventListener('click', guessType);
+
+function getPokemon() {
 	console.log(choice);
-
-	fetch(url)
+	fetch(startUrl)
 		.then((res) => res.json()) // parse response as JSON
 		.then((data) => {
 			console.log(data);
             console.log(data.name)
+            console.log(data.types)
             document.querySelector('img').src = data.sprites.front_default
             document.getElementById('pokemon-name').innerHTML = data.name
             // console.log(getRandomID(151))
@@ -31,3 +35,18 @@ function getFetch() {
 		});
 }
 
+// Guess function to search API date for type by ID(choice)
+function guessType() {
+	console.log(choice);
+    console.log(typeof choice)
+	fetch(guessUrl)
+		.then((res) => res.json()) // parse response as JSON
+		.then((data) => {
+			console.log(data);
+			console.log(data.name);
+			document.getElementById('answer').innerHTML = data.name;
+		})
+		.catch((err) => {
+			console.log(`error ${err}`);
+		});
+}
