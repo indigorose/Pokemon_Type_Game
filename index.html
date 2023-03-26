@@ -4,7 +4,6 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<link rel="stylesheet" href="style.css" />
 		<title>Document</title>
 	</head>
@@ -13,14 +12,21 @@
 		<nav class="navbar"></nav>
 		<!-- Main Container -->
 		<section class="main-container">
-			<!-- Title -->
-			<h1 class="title">Gotta Catch 'em All!!</h1>
-			<!-- Rules -->
-			<p class="container-welcome">
-				Welcome to the Gotta Catch 'em All Mini Game
-			</p>
-			<!-- Scoring -->
-			<h3 class="container-score">0</h3>
+			<div class="top-container">
+				<!-- Title -->
+				<div class="container-welcome">
+					<h1 class="container-title">Gotta Catch Them All!!</h1>
+					<!-- Rules -->
+					<p class="container-introduction">
+						Welcome to the Gotta Catch Them All Mini Game.
+					</p>
+				</div>
+				<!-- Scoring -->
+				<div class="container-score">
+					<p>Score</p>
+					<p id="score">0</p>
+				</div>
+			</div>
 			<!-- Pokemon Image -->
 			<div class="container-pokemon">
 				<h2>Who's that Pokemon</h2>
@@ -31,8 +37,9 @@
 					<img src="images/who_pokemon.0.jpg" alt="Pokemon Image" />
 				</div>
                 <div class="pokemon-answer">
-                    <h2>Guess My Pokemon Type?</h2>
-                    <input type="text" name="" value="" />
+                    <h2>Guess My Pokemon?</h2>
+                    <p id="answer"></p>
+                    <input type="text" name="guessBox" value="" id="inputGuess" />
                     <button id='guessPokemon' type="button" name="button">Guess</button>
                 </div>
 			</div>

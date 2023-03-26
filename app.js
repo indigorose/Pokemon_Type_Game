@@ -1,15 +1,21 @@
 /* The aim of the game is to guess the name of the pokemon based on what is stored in the pokemon API. 
-Initially try to 'catch' 30 pokemon at random, with possible bonus points for famous pokemon.
+Initially try to 'catch' pokemon at random, with possible bonus points for famous pokemon.
 */
 
 // Extra Scoring Pokemon
-let famousPokemon = [
-	'Bulbasaur',
-	'Squirtle',
-	'Charmander',
-	'Pikachu',
-	'Mew',
-	'MewTwo',
+var famousPokemon = [
+	'bulbasaur',
+	'squirtle',
+	'charmander',
+	'pikachu',
+	'mew',
+	'mewtwo',
+    'staryu',
+    'starmie',
+    'psyduck',
+    'onix',
+    'geodude',
+    'vulpix',    
 ];
 
 // Generate random number pokemon - original 151
@@ -18,10 +24,11 @@ function getRandomID(max) {
 }
 
 // Store already called Pokemon to avoid double calls
-let pokemonStore = [];
-let answerPokemon = 'Not yet'
-let score = 0
-
+var pokemonStore = [];
+var answerPokemon = 'Not yet'
+var guess = ''
+var score = 0
+var choice = 0
 // Button Functionality
 document.getElementById('start').addEventListener('click', getPokemon);
 
@@ -42,25 +49,50 @@ function getPokemon() {
 			console.log(`error ${err}`);
 		});
 }
-document.getElementById('guessPokemon').addEventListener('click', checkAnswer);
+
 // Guess function to create guessing buttons
+document.getElementById('guessPokemon').addEventListener('click', checkAnswer);
+
 function checkAnswer(){
-    let guess = document.querySelector('input').value.toLowerCase();
+    var guess = document.querySelector('input').value.toLowerCase();
     console.log('This is my pokemon guess ' + guess)
     console.log('This is my pokemon answer ' + answerPokemon)
     if (answerPokemon === guess){
 // TODO - break down actions when we have a right answer.
+        // Update the score
         console.log('great')
-        score +=1
+        scoring()
+        document.getElementById('score').innerHTML = score
         console.log(score)
-        pokemonStore.push(answerPokemon)
-        console.log(pokemonStore)
-        getPokemon()
-
+        // display correct answer
+        document.getElementById('answer').innerHTML = `Yes! You've found a ${answerPokemon}`
+        document.getElementById('inputGuess').value = ''
+        // Reset for the next round.
+        setTimeout(() => {
+                getPokemon()
+				document.getElementById('answer').innerHTML ='';
+				}, 3000);
     } else {
-        console.log('wrong answer')
-        getPokemon()
+        document.getElementById(
+            'answer'
+        ).innerHTML = `Sorry, it was a ${answerPokemon} not a ${guess}`;
+        document.getElementById('inputGuess').value = '';
+        // Reset for the next round.
+        setTimeout(() => {
+            getPokemon();
+            document.getElementById('answer').innerHTML = '';
+        }, 3000);
     }
 };
 // 404 error with guessUrl
 // const guessUrl = `https://pokeapi.co/api/v2/type/18`;
+
+function scoring(){
+    if (famousPokemon.includes(guess)){
+        score += 2
+        return score
+    } else {
+        score += 1
+        return score
+    }
+}
