@@ -40,10 +40,12 @@ function getPokemon() {
 		.then((res) => res.json()) // parse response as JSON
 		.then((data) => {
 			// console.log(data);
-			console.log(data.name);
+			// console.log(data.name);
 			document.querySelector('img').src = data.sprites.front_default;
             answerPokemon = data.name
-            console.log(answerPokemon)
+            console.log(`The hint is ${answerPokemon}`)
+            document.getElementById('guessTitle').innerHTML = 'I think it\'s a...';          
+
 		})
 		.catch((err) => {
 			console.log(`error ${err}`);
@@ -55,14 +57,14 @@ document.getElementById('guessPokemon').addEventListener('click', checkAnswer);
 
 function checkAnswer(){
     var guess = document.querySelector('input').value.toLowerCase();
-    console.log('This is my pokemon guess ' + guess)
-    console.log('This is my pokemon answer ' + answerPokemon)
+    // console.log('This is my pokemon guess ' + guess)
+    // console.log('This is my pokemon answer ' + answerPokemon)
     if (answerPokemon === guess){
 // TODO - break down actions when we have a right answer.
         // Update the score
         console.log('great')
         scoring()
-        document.getElementById('score').innerHTML = score
+        document.getElementById('score').innerHTML = `Score: ${score}`;
         console.log(score)
         // display correct answer
         document.getElementById('answer').innerHTML = `Yes! You've found a ${answerPokemon}`
@@ -95,4 +97,15 @@ function scoring(){
         score += 1
         return score
     }
-}
+};
+
+document.getElementById('hint').addEventListener('click', hint);
+
+function hint(){
+
+document.getElementById('answer').innerHTML = 'Open the console - Option + ⌘ + J (on macOS), or Shift + CTRL + J (on Windows/Linux).';
+    setTimeout(() => {
+        document.getElementById('answer').innerHTML = '';
+    }, 5000);
+
+};

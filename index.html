@@ -19,32 +19,33 @@
 					<!-- Rules -->
 					<p class="container-introduction">
 						Welcome to the Gotta Catch Them All Mini Game.
+						<br>Click start to see if you can name all 151 Pokemon.
 					</p>
 				</div>
 				<!-- Scoring -->
 				<div class="container-score">
-					<p>Score</p>
-					<p id="score">0</p>
+
+					<p id="score">Score: 0</p>
 				</div>
 			</div>
 			<!-- Pokemon Image -->
 			<div class="container-pokemon">
-				<h2>Who's that Pokemon</h2>
-				<button id="start" type="button" name="button">
-					Start Game
+				<h2>Who's that Pokemon?</h2>
+				<button id="start" type="button" name="button">Start
 				</button>
 				<div class="pokemon">
 					<img src="images/who_pokemon.0.jpg" alt="Pokemon Image" />
 				</div>
                 <div class="pokemon-answer">
-                    <h2>Guess My Pokemon?</h2>
+                    <h2 id="guessTitle">Guess Down Here</h2>
                     <p id="answer"></p>
                     <input type="text" name="guessBox" value="" id="inputGuess" />
                     <button id='guessPokemon' type="button" name="button">Guess</button>
+					<button id="hint">Hint</button>
                 </div>
 			</div>
 			<!-- Type Buttons -->
-			<div class="container-pokemon-type"></div>
+			<!-- <div class="container-pokemon-type"></div> -->
 			<script src="app.js"></script>
 		</section>
 	</body>
